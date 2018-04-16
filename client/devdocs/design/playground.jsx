@@ -18,10 +18,10 @@ import jsxToString from 'jsx-to-string';
 import config from 'config';
 import * as componentExamples from 'devdocs/design/component-examples';
 import DocumentHead from 'components/data/document-head';
+import DropdownItem from 'components/select-dropdown/item';s
 import fetchComponentsUsageStats from 'state/components-usage-stats/actions';
-import Main from 'components/main';
-import DropdownItem from 'components/select-dropdown/item';
 import * as playgroundScope from 'devdocs/design/playground-scope';
+import Main from 'components/main';
 import SelectDropdown from 'components/select-dropdown';
 
 class DesignAssets extends React.Component {
