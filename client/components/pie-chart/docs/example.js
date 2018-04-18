@@ -9,8 +9,11 @@ import React, { Component } from 'react';
  * Internal dependencies
  */
 import Card from 'components/card';
+import CardHeading from 'components/card-heading';
 import PieChart from 'components/pie-chart';
 import PieChartLegend from 'components/pie-chart/legend';
+import PieChartPlaceholder from 'components/pie-chart/placeholder';
+import PieChartLegendPlaceholder from 'components/pie-chart/legend-placeholder';
 
 const titleFunc = ( translate, dataTotal ) => {
 	return translate( '%(dataTotal)d Total Searches', {
@@ -53,10 +56,17 @@ class PieChartExample extends Component {
 
 	render() {
 		return (
-			<Card>
-				<PieChart data={ this.state.data } title={ titleFunc } />
-				<PieChartLegend data={ this.state.data } />
-			</Card>
+			<div>
+				<Card>
+					<PieChart data={ this.state.data } title={ titleFunc } />
+					<PieChartLegend data={ this.state.data } />
+				</Card>
+				<Card>
+					<CardHeading />
+					<PieChartPlaceholder title={ true } />
+					<PieChartLegendPlaceholder numLegendElements={ 2 } />
+				</Card>
+			</div>
 		);
 	}
 }
