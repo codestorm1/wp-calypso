@@ -50,7 +50,9 @@ class PieChartLegend extends Component {
 							name={ datum.name }
 							value={ datum.value }
 							sectionNumber={ datum.sectionNum }
-							percent={ Math.round( datum.value / dataTotal * 100 ).toString() }
+							percent={
+								dataTotal > 0 ? Math.round( datum.value / dataTotal * 100 ).toString() : '0'
+							}
 							description={ datum.description }
 						/>
 					);

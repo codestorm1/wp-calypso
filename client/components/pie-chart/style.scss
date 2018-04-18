@@ -32,6 +32,10 @@
 	fill: $blue-light;
 }
 
+.pie-chart__chart-drawing-empty {
+	fill: $gray;
+}
+
 .pie-chart__legend-item {
 	display: flex;
 	flex-direction: column;

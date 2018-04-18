@@ -23,11 +23,7 @@ class PieChart extends Component {
 		title: PropTypes.oneOfType( [ PropTypes.string, PropTypes.func ] ),
 	};
 
-	constructor( props ) {
-		super( props );
-
-		this.state = this.processData( props.data );
-	}
+	state = this.processData( this.props.data );
 
 	componentWillReceiveProps( nextProps ) {
 		if ( ! isDataEqual( this.props.data, nextProps.data ) ) {
@@ -58,9 +54,28 @@ class PieChart extends Component {
 		};
 	}
 
+	renderPieChart() {
+		const { data } = this.state;
+		return data.map( ( datum, index ) => {
+			return (
+				<path
+					className={ `pie-chart__chart-section-${ datum.sectionNum }` }
+					key={ index.toString() }
+					d={ datum.path }
+				/>
+			);
+		} );
+	}
+
+	renderEmptyChart() {
+		return (
+			<circle cx={ 0 } cy={ 0 } r={ SVG_SIZE / 2 } className="pie-chart__chart-drawing-empty" />
+		);
+	}
+
 	render() {
 		const { title, translate } = this.props;
-		const { data, dataTotal } = this.state;
+		const { dataTotal } = this.state;
 
 		return (
 			<div className={ 'pie-chart' }>
@@ -70,15 +85,7 @@ class PieChart extends Component {
 					preserveAspectRatio={ 'xMidYMid meet' }
 				>
 					<g transform={ `translate(${ SVG_SIZE / 2 }, ${ SVG_SIZE / 2 })` }>
-						{ data.map( ( datum, index ) => {
-							return (
-								<path
-									className={ `pie-chart__chart-section-${ datum.sectionNum }` }
-									key={ index.toString() }
-									d={ datum.path }
-								/>
-							);
-						} ) }
+						{ dataTotal > 0 ? this.renderPieChart() : this.renderEmptyChart() }
 					</g>
 				</svg>
 				{ title && (
