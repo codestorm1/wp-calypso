@@ -5,16 +5,17 @@
  */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { isEqual, sortBy } from 'lodash';
 import { localize } from 'i18n-calypso';
 import { pie as d3Pie, arc as d3Arc } from 'd3-shape';
 
 /**
  * Internal dependencies
  */
-import DataType from './data/type';
-import { sortDataAndAssignSections, isDataEqual } from './data';
+import DataType from './data-type';
 
 const SVG_SIZE = 300;
+const NUM_COLOR_SECTIONS = 3;
 
 class PieChart extends Component {
 	static propTypes = {
@@ -26,13 +27,22 @@ class PieChart extends Component {
 	state = this.processData( this.props.data );
 
 	componentWillReceiveProps( nextProps ) {
-		if ( ! isDataEqual( this.props.data, nextProps.data ) ) {
+		if ( ! isEqual( this.props.data, nextProps.data ) ) {
 			this.setState( this.processData( nextProps.data ) );
 		}
 	}
 
+	sortDataAndAssignSections( data ) {
+		return sortBy( data, datum => datum.value )
+			.reverse()
+			.map( ( datum, index ) => ( {
+				...datum,
+				sectionNum: index % NUM_COLOR_SECTIONS,
+			} ) );
+	}
+
 	processData( data ) {
-		const sortedData = sortDataAndAssignSections( data );
+		const sortedData = this.sortDataAndAssignSections( data );
 
 		const arcs = d3Pie()
 			.startAngle( Math.PI )
