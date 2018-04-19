@@ -104,7 +104,7 @@ class GoogleMyBusinessStatsChart extends Component {
 						<option value="quarter">{ 'Quarter' }</option>
 					</select>
 					<div className="gmb-stats__metric-chart">
-						<LineChart data={ transformedData } title={ chartTitle } />
+						<LineChart data={ transformedData } />
 					</div>
 				</Card>
 			</div>
