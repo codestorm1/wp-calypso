@@ -18,11 +18,7 @@ class PieChartLegend extends Component {
 		data: PropTypes.arrayOf( DataType ).isRequired,
 	};
 
-	constructor( props ) {
-		super( props );
-
-		this.state = this.processData( props.data );
-	}
+	state = this.processData( this.props.data );
 
 	componentWillReceiveProps( nextProps ) {
 		if ( ! isDataEqual( this.props.data, nextProps.data ) ) {
@@ -43,10 +39,10 @@ class PieChartLegend extends Component {
 		const { data, dataTotal } = this.state;
 		return (
 			<div className={ 'pie-chart__legend' }>
-				{ data.map( ( datum, index ) => {
+				{ data.map( datum => {
 					return (
 						<LegendItem
-							key={ index.toString() }
+							key={ datum.name }
 							name={ datum.name }
 							value={ datum.value }
 							sectionNumber={ datum.sectionNum }

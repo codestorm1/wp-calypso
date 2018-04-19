@@ -56,11 +56,11 @@ class PieChart extends Component {
 
 	renderPieChart() {
 		const { data } = this.state;
-		return data.map( ( datum, index ) => {
+		return data.map( datum => {
 			return (
 				<path
 					className={ `pie-chart__chart-section-${ datum.sectionNum }` }
-					key={ index.toString() }
+					key={ datum.name }
 					d={ datum.path }
 				/>
 			);

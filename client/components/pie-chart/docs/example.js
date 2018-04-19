@@ -29,40 +29,20 @@ class PieChartExample extends Component {
 	constructor( props ) {
 		super( props );
 
-		// const data = [
-		// 	{
-		// 		value: 189,
-		// 		name: 'Direct',
-		// 		description: 'Customers who find your listing searching for your business or address',
-		// 	},
-		// 	{
-		// 		value: 362,
-		// 		name: 'Discovery',
-		// 		description:
-		// 			'Customers who find your listing searching for a category, product, or service',
-		// 	},
-		// 	{
-		// 		value: 122,
-		// 		name: 'Referral',
-		// 		description:
-		// 			'Customers who find your listing by being referred from another type of search',
-		// 	},
-		// ];
-
 		const data = [
 			{
-				value: 0,
+				value: 189,
 				name: 'Direct',
 				description: 'Customers who find your listing searching for your business or address',
 			},
 			{
-				value: 0,
+				value: 362,
 				name: 'Discovery',
 				description:
 					'Customers who find your listing searching for a category, product, or service',
 			},
 			{
-				value: 0,
+				value: 122,
 				name: 'Referral',
 				description:
 					'Customers who find your listing by being referred from another type of search',
@@ -80,11 +60,6 @@ class PieChartExample extends Component {
 				<Card>
 					<PieChart data={ this.state.data } title={ titleFunc } />
 					<PieChartLegend data={ this.state.data } />
-				</Card>
-				<Card>
-					<CardHeading />
-					<PieChartPlaceholder title={ true } />
-					<PieChartLegendPlaceholder numLegendElements={ 2 } />
 				</Card>
 			</div>
 		);
