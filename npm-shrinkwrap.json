@@ -912,8 +912,8 @@
       }
     },
     "@types/node": {
-      "version": "9.6.5",
-      "integrity": "sha512-NOLEgsT6UiDTjnWG5Hd2Mg25LRyz/oe8ql3wbjzgSFeRzRROhPmtlsvIrei4B46UjERF0td9SZ1ZXPLOdcrBHg==",
+      "version": "9.6.6",
+      "integrity": "sha512-SJe0g5cZeGNDP5sD8mIX3scb+eq8LQQZ60FXiKZHipYSeEFZ5EKml+NNMiO76F74TY4PoMWlNxF/YRY40FOvZQ==",
       "dev": true
     },
     "JSONStream": {
@@ -3924,7 +3924,7 @@
         "create-hmac": "1.1.7",
         "diffie-hellman": "5.0.3",
         "inherits": "2.0.1",
-        "pbkdf2": "3.0.14",
+        "pbkdf2": "3.0.16",
         "public-encrypt": "4.0.2",
         "randombytes": "2.0.6",
         "randomfill": "1.0.4"
@@ -10630,6 +10630,13 @@
       "version": "4.17.8",
       "integrity": "sha512-I9mjAxengFAleSThFhhAhvba6fsO0hunb9/0sQ6qQihSZsJRBofv2rYH58WXaOb/O++eUmYpCLywSQ22GfU+sA=="
     },
+    "lodash-humps": {
+      "version": "3.1.2",
+      "integrity": "sha512-gOaZwNZk4J++Sep2KpoqnFBZe1aK8WvDUWtqyNvZIMEbjN+EUo0DdwNhoJAASeS7FESIdW0yTjtr5FwxJIUd4w==",
+      "requires": {
+        "lodash": "4.17.5"
+      }
+    },
     "lodash._arraycopy": {
       "version": "3.0.0",
       "integrity": "sha1-due3wfH7klRzdIeKVi7Qaj5Q9uE="
@@ -12449,7 +12456,7 @@
         "browserify-aes": "1.2.0",
         "create-hash": "1.2.0",
         "evp_bytestokey": "1.0.3",
-        "pbkdf2": "3.0.14"
+        "pbkdf2": "3.0.16"
       }
     },
     "parse-data-uri": {
@@ -12514,7 +12521,7 @@
       "integrity": "sha512-rgO9Zg5LLLkfJF9E6CCmXlSE4UVceloys8JrFqCcHloC3usd/kJCyPDwH2SOlzix2j3xaP9sUX3e8+kvkuleAA==",
       "dev": true,
       "requires": {
-        "@types/node": "9.6.5"
+        "@types/node": "9.6.6"
       }
     },
     "parsejson": {
@@ -12633,8 +12640,8 @@
       }
     },
     "pbkdf2": {
-      "version": "3.0.14",
-      "integrity": "sha512-gjsZW9O34fm0R7PaLHRJmLLVfSoesxztjPjE9o6R+qtVJij90ltg1joIovN9GKrRW3t1PzhDDG3UMEMFfZ+1wA==",
+      "version": "3.0.16",
+      "integrity": "sha512-y4CXP3thSxqf7c0qmOF+9UeOTrifiVTIM+u7NWlq+PRsHbr7r7dpCmvzrZxa96JJUNi0Y5w9VqG5ZNeCVMoDcA==",
       "requires": {
         "create-hash": "1.2.0",
         "create-hmac": "1.1.7",
