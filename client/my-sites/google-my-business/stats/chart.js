@@ -106,6 +106,7 @@ class GoogleMyBusinessStatsChart extends Component {
 					</select>
 					<div className="gmb-stats__metric-chart">
 						<LineChart
+							fillArea
 							data={ transformedData }
 							renderTooltipForDatanum={ this.props.renderTooltipForDatanum }
 						/>
