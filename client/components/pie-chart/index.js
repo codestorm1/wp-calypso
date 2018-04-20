@@ -5,7 +5,7 @@
  */
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { isEqual, sortBy } from 'lodash';
+import { isEqualWith, isEqual, sortBy } from 'lodash';
 import { localize } from 'i18n-calypso';
 import { pie as d3Pie, arc as d3Arc } from 'd3-shape';
 
@@ -17,6 +17,14 @@ import DataType from './data-type';
 const SVG_SIZE = 300;
 const NUM_COLOR_SECTIONS = 3;
 
+const customizer = ( previousData, newData ) => {
+	const reducer = datum => ( {
+		value: datum.value,
+		name: datum.name,
+	} );
+	return isEqual( previousData.map( reducer ), newData.map( reducer ) );
+};
+
 class PieChart extends Component {
 	static propTypes = {
 		data: PropTypes.arrayOf( DataType ).isRequired,
@@ -24,30 +32,19 @@ class PieChart extends Component {
 		title: PropTypes.oneOfType( [ PropTypes.string, PropTypes.func ] ),
 	};
 
-	state = this.processData( this.props.data );
-
-	componentWillReceiveProps( nextProps ) {
-		if ( ! isEqual( this.props.data, nextProps.data ) ) {
-			this.setState( this.processData( nextProps.data ) );
+	static getDerivedStateFromProps( nextProps, prevState ) {
+		const newSortedData = PieChart.sortDataAndAssignSections( nextProps.data );
+		if ( ! isEqualWith( prevState.data, newSortedData, customizer ) ) {
+			return PieChart.processData( newSortedData );
 		}
+
+		return null;
 	}
 
-	sortDataAndAssignSections( data ) {
-		return sortBy( data, datum => datum.value )
-			.reverse()
-			.map( ( datum, index ) => ( {
-				...datum,
-				sectionNum: index % NUM_COLOR_SECTIONS,
-			} ) );
-	}
-
-	processData( data ) {
-		const sortedData = this.sortDataAndAssignSections( data );
-
+	static processData( data ) {
 		const arcs = d3Pie()
-			.startAngle( Math.PI )
 			.startAngle( -Math.PI )
-			.value( datum => datum.value )( sortedData );
+			.value( datum => datum.value )( data );
 
 		const arcGen = d3Arc()
 			.innerRadius( 0 )
@@ -56,13 +53,24 @@ class PieChart extends Component {
 		const paths = arcs.map( arc => arcGen( arc ) );
 
 		return {
-			data: sortedData.map( ( datum, index ) => ( {
+			data: data.map( ( datum, index ) => ( {
 				...datum,
 				path: paths[ index ],
 			} ) ),
-			dataTotal: sortedData.reduce( ( total, datum ) => total + datum.value, 0 ),
+			dataTotal: data.reduce( ( total, datum ) => total + datum.value, 0 ),
 		};
 	}
+
+	static sortDataAndAssignSections( data ) {
+		return sortBy( data, datum => datum.value )
+			.reverse()
+			.map( ( datum, index ) => ( {
+				...datum,
+				sectionNum: index % NUM_COLOR_SECTIONS,
+			} ) );
+	}
+
+	state = PieChart.processData( PieChart.sortDataAndAssignSections( this.props.data ) );
 
 	renderPieChart() {
 		const { data } = this.state;
